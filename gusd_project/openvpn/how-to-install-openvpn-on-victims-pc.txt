@@ -1,1 +1,5 @@
 Invoke-WebRequest -Uri "https://openvpn.net/downloads/openvpn-connect-v3-windows.msi" -OutFile "C:\Users\<YourUsername>\Downloads\openvpn-installer.msi"
+
+After it is installed, silently execute the file without user interaction:
+
+Start-Process msiexec.exe -ArgumentList "/i", "C:\Users\<YourUsername>\Downloads\openvpn-installer.msi", "/quiet", "/norestart" -Wait
