@@ -3,3 +3,18 @@ Invoke-WebRequest -Uri "https://openvpn.net/downloads/openvpn-connect-v3-windows
 After it is installed, silently execute the file without user interaction:
 
 Start-Process msiexec.exe -ArgumentList "/i", "C:\Users\<YourUsername>\Downloads\openvpn-installer.msi", "/quiet", "/norestart" -Wait
+
+By default, OpenVPN typically looks for configuration files in:
+C:\Program Files\OpenVPN\config\
+or "config" file of custom directory
+
+This is how to copy a .ovpn configuration file into the OpenVPN config directory:
+
+$sourcePath = "C:\Path\To\Your\Config\file.ovpn"   # Replace with your local path to the .ovpn file
+$destinationPath = "C:\Program Files\OpenVPN\config\file.ovpn"  # Adjust to your OpenVPN's config folder
+# Copy the .ovpn file to the OpenVPN config folder
+Copy-Item -Path $sourcePath -Destination $destinationPath -Force
+
+OpenVPN typically auto-detects any .ovpn file placed in its config folder. However, if you need to launch OpenVPN from PowerShell and specify a configuration file explicitly, you can use Start-Process to run OpenVPN with a specific config file. Example to start OpenVPN with a specific .ovpn file:
+
+Start-Process "C:\Program Files\OpenVPN\bin\openvpn.exe" -ArgumentList "--config", "C:\Program Files\OpenVPN\config\file.ovpn"
