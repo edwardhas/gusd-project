@@ -1,1 +1,1 @@
-Invoke-WebRequest -Uri "https://openvpn.net/downloads/openvpn-connect-v3-windows.msi" -OutFile "C:\Users\<YourUsername>\Downloads\openvpn-installer.exe"
+Invoke-WebRequest -Uri "https://openvpn.net/downloads/openvpn-connect-v3-windows.msi" -OutFile "C:\Users\<YourUsername>\Downloads\openvpn-installer.msi"
