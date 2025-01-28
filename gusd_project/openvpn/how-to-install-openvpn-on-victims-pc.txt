@@ -1,12 +1,17 @@
+1. 
+Install .msi openvpn installer by the following command:
 Invoke-WebRequest -Uri "https://openvpn.net/downloads/openvpn-connect-v3-windows.msi" -OutFile "C:\Users\<YourUsername>\Downloads\openvpn-installer.msi"
 
 After it is installed, silently execute the file without user interaction:
-
 Start-Process msiexec.exe -ArgumentList "/i", "C:\Users\<YourUsername>\Downloads\openvpn-installer.msi", "/quiet", "/norestart" -Wait
 
-By default, OpenVPN typically looks for configuration files in:
-C:\Program Files\OpenVPN\config\
-or "config" file of custom directory
+
+2. 
+Download .ovpn configuration file (from this directory) called "jp-free-1.protonvpn.tcp.ovpn"
+
+
+3. 
+By default, OpenVPN typically looks for configuration files in (C:\Program Files\OpenVPN\config\) or "config" folder of custom directory
 
 This is how to copy a .ovpn configuration file into the OpenVPN config directory:
 
@@ -17,4 +22,21 @@ Copy-Item -Path $sourcePath -Destination $destinationPath -Force
 
 OpenVPN typically auto-detects any .ovpn file placed in its config folder. However, if you need to launch OpenVPN from PowerShell and specify a configuration file explicitly, you can use Start-Process to run OpenVPN with a specific config file. Example to start OpenVPN with a specific .ovpn file:
 
-Start-Process "C:\Program Files\OpenVPN\bin\openvpn.exe" -ArgumentList "--config", "C:\Program Files\OpenVPN\config\file.ovpn"
+Start-Process "C:\Program Files\OpenVPN\bin\openvpn.exe" -ArgumentList "--config", "C:\Program Files\OpenVPN\config\file.ovpn" -WindowStyle Hidden -NoNewWindow
+
+4.
+After all you would like to run openVPN on the background each time user logs into its account:
+
+# Set the path to OpenVPN and the configuration file
+$openvpnPath = "C:\Program Files\OpenVPN\bin\openvpn.exe"  # Adjust if OpenVPN is installed elsewhere
+$configPath = "C:\Program Files\OpenVPN\config\file.ovpn"  # Adjust to your actual configuration file path
+# Set the registry key to run OpenVPN on user login
+$regKeyPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
+$regName = "OpenVPN"
+$regValue = "`"$openvpnPath`" --config `"$configPath`""
+# Create the registry entry
+Set-ItemProperty -Path $regKeyPath -Name $regName -Value $regValue
+Write-Host "OpenVPN will now run automatically on login."
+
+5.
+Done
