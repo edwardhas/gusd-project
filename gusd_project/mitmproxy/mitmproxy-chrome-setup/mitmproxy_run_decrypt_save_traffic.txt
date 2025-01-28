@@ -1,0 +1,10 @@
+`@echo off`
+
+`:: Start MITMProxy with both .har and log file outputs
+start /B mitmproxy --save-stream-file="C:\Path\To\Save\traffic.har" --log-level=info --log="C:\Path\To\Save\mitmproxy_log.txt" --quiet`
+
+`:: Wait for MITMProxy to start
+timeout /t 3 >nul`
+
+`:: Start Chrome with proxy settings
+start chrome --proxy-server="[http://127.0.0.1:8080](http://127.0.0.1:8080/)"`

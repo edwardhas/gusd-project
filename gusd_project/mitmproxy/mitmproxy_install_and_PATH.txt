@@ -1,0 +1,5 @@
+Set the mitm to the PATH, so could access it from everywhere.
+
+THIS IS DONE BY THE INSTALLER BUT JUST IN CASE LET IT BE HERE
+
+[System.Environment]::SetEnvironmentVariable("PATH", $env:PATH + ";C:\path\to\mitmproxy\folder", [System.EnvironmentVariableTarget]::Machine)
