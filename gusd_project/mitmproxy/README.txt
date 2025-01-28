@@ -11,10 +11,8 @@ Finally, verify installation:
 	mitmproxy --version
 
 
-ALTERNATIVE, RUN IF THE FIRST WAY DID NOT WORK (Not recommended because the .exe requires UI installation, it does not work with powershell "/S" silent argument):
+ALTERNATIVE, RUN IF THE FIRST WAY DID NOT WORK:
+Invoke-WebRequest -Uri "https://downloads.mitmproxy.org/11.1.0/mitmproxy-11.1.0-windows-x86_64.zip" -OutFile "C:\path\to\save\mitmproxy-installer.zip"
 
-Invoke-WebRequest -Uri "https://downloads.mitmproxy.org/11.1.0/mitmproxy-11.1.0-windows-x86_64-installer.exe" -OutFile "C:\path\to\save\mitmproxy-installer.exe"
-
-Then execute it (the installer automatically adds mitmproxy to the PATH env)
-Start-Process -FilePath "C:\path\to\mitmproxy-installer.exe" -ArgumentList "/S" -NoNewWindow -Wait
-
+Then extract it (.zip file has .exe of 3 mitmproxy services)
+Expand-Archive -Path "C:\Users\<YourUsername>\Downloads\file.zip" -DestinationPath "C:\Users\<YourUsername>\Downloads\extracted" -Force
