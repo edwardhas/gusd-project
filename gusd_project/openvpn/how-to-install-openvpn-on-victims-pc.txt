@@ -5,7 +5,7 @@ Invoke-WebRequest -Uri "https://openvpn.net/downloads/openvpn-connect-v3-windows
 You have to set openVPN as a windows service in order to run and work with it silently.
 
 After it is installed, silently execute the file without user interaction:
-Start-Process msiexec.exe -ArgumentList "/i", "C:\path\to\your\openvpn_installer.msi", "/quiet", "/norestart", "INSTALLSERVICE=1", "REMOVEGUI=1" -NoNewWindow -Wait
+Start-Process -FilePath "msiexec.exe" -ArgumentList "/i path\to\openvpn-installer.msi /quiet /norestart ADDLOCAL=OpenVPN.Service DESKTOP_SHORTCUT=0 LAUNCH_GUI=0" -Wait
 
 
 
