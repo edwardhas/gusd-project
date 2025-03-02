@@ -1,0 +1,1 @@
+To download demonNgrok.exe to victim's computer, create a release in this repository, add the executable file.
